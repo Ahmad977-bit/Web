@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Ahmad | Blue & Gold Creative</title>
+<style>
+:root{
+  --blue:#0056ff; --blue2:#00aaff; --gold:#FFD700; --gold2:#FFAA00;
+  --bg:#050B1E; --card:#0F1D45; --text:#fff; --muted:#B8C6E8; --radius:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ===== HEADER + HAMBURGER FOR ANDROID ===== */
+header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(5,11,30,.98);display:flex;justify-content:space-between;align-items:center;padding:12px 5%;border-bottom:2px solid var(--gold);height:62px}
+.logo{font-size:21px;font-weight:900;line-height:1}.logo span{color:var(--gold)}
+.logo small{display:block;font-size:9px;letter-spacing:3px;color:var(--blue2);font-weight:700;margin-top:2px}
+nav{display:flex;gap:14px;align-items:center}
+nav a{font-size:13px;font-weight:700;cursor:pointer;opacity:.9;padding:8px 12px;border-radius:20px;white-space:nowrap}
+nav a.active,nav a:hover{background:var(--gold);color:#000}
+
+/* HAMBURGER BUTTON - BIG FOR ANDROID FINGER */
+.hamburger{
+  display:none;
+  width:48px;height:48px;
+  background:var(--gold);
+  border-radius:12px;
+  border:none;cursor:pointer;
+  flex-direction:column;justify-content:center;align-items:center;gap:5px;
+  padding:10px;
+}
+.hamburger span{display:block;width:24px;height:3px;background:#000;border-radius:10px;transition:.3s}
+/* When menu open, turn to X */
+.hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+.btn{background:linear-gradient(90deg,var(--blue),var(--blue2));color:#fff;padding:12px 24px;border:none;border-radius:30px;font-weight:800;cursor:pointer;display:inline-block}
+.btn-gold{background:linear-gradient(90deg,var(--gold),var(--gold2));color:#000;padding:12px 24px;border:none;border-radius:30px;font-weight:800;cursor:pointer;display:inline-block}
+.btn-outline{background:transparent;border:2px solid var(--gold);color:var(--gold);padding:10px 22px;border-radius:30px;font-weight:800;cursor:pointer;display:inline-block}
+.badge{display:inline-block;background:rgba(255,215,0,.15);border:1px solid var(--gold);color:var(--gold);padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700}
+
+.page{display:none;padding:90px 5% 50px;min-height:100vh;max-width:1200px;margin:auto;animation:fade .3s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+h1{font-size:clamp(32px,7vw,60px);line-height:1.05} h1 span{color:var(--gold)}
+h2{font-size:clamp(26px,5vw,38px);margin-bottom:10px} h2 span{color:var(--gold)}
+.subtitle{color:var(--muted);max-width:680px;margin:12px 0 20px}
+.tag{display:inline-block;background:var(--card);border:1px solid rgba(255,215,0,.3);padding:7px 12px;border-radius:20px;font-size:12px;margin:4px 4px 0 0}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}
+.hero-img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:24px;border:3px solid var(--gold)}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.stats{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.stat{background:var(--card);padding:14px 8px;border-radius:var(--radius);flex:1;min-width:105px;text-align:center;border-top:3px solid var(--gold)}
+.stat b{font-size:20px;color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.card{background:var(--card);padding:20px;border-radius:var(--radius);border:1px solid rgba(255,255,255,.06)}
+.card p{color:var(--muted);font-size:14px;margin:8px 0 12px}
+.card ul{font-size:13px;color:var(--muted);margin-left:16px;margin-bottom:12px}
+.price{font-size:22px;color:var(--gold);font-weight:900}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.p-card{background:var(--card);border-radius:var(--radius);overflow:hidden}
+.p-card img{height:180px;width:100%;object-fit:cover}
+.p-card div{padding:16px}.p-card p{color:var(--muted);font-size:13px}
+.filter{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.filter button{padding:9px 16px;border-radius:20px;border:1px solid #2a3a6b;background:#0F1D45;color:#fff;cursor:pointer;font-weight:700}
+.filter button.active{background:var(--gold);color:#000}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.skill{margin-bottom:12px}.skill span{display:flex;justify-content:space-between;font-size:13px;font-weight:700}
+.bar{height:9px;background:#1e2f5e;border-radius:10px;overflow:hidden;margin-top:5px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--gold))}
+.timeline{border-left:3px solid var(--gold);padding-left:20px;margin-top:18px}
+.timeline div{margin-bottom:16px;position:relative}
+.timeline div::before{content:"";width:12px;height:12px;background:var(--gold);border-radius:50%;position:absolute;left:-27px;top:5px}
+.timeline small{color:var(--gold);font-weight:800}
+.faq{background:var(--card);padding:16px;border-radius:14px;margin-bottom:10px;cursor:pointer}
+.faq p{display:none;color:var(--muted);font-size:14px;margin-top:8px}.faq.open p{display:block}
+.testi{background:linear-gradient(135deg,#0F1D45,#0A2A6B);padding:20px;border-radius:16px;border-left:4px solid var(--gold)}
+.testi p{font-style:italic;color:#E6EDFF;font-size:14px}.testi b{color:var(--gold)}
+input,textarea,select{width:100%;padding:14px;border-radius:10px;border:1px solid #2a3a6b;background:#0A1433;color:#fff;margin-bottom:12px;outline:none;font-size:16px}
+input:focus,textarea:focus{border-color:var(--gold)}
+footer{text-align:center;padding:22px;color:var(--muted);font-size:13px;border-top:1px solid rgba(255,215,0,.2);background:#03071A}
+.socials{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.socials a{background:#14295E;padding:9px 14px;border-radius:20px;font-size:13px;font-weight:700;border:1px solid rgba(255,215,0,.3)}
+.marquee{background:var(--gold);color:#000;font-weight:900;padding:10px 0;overflow:hidden;white-space:nowrap;margin:20px -5% 0}
+.marquee span{padding:0 14px}
+
+/* ===== ANDROID RESPONSIVE - HAMBURGER SHOWS HERE ===== */
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .portfolio-grid,.grid3{grid-template-columns:repeat(2,1fr)}
+  .hero{grid-template-columns:1fr;text-align:center}
+  .hero-img{max-width:300px;margin:auto}
+  .hero-btns,.stats{justify-content:center}
+}
+@media(max-width:768px){
+  /* SHOW HAMBURGER ONLY ON PHONE/TABLET */
+  .hamburger{display:flex}
+  /* HIDE NORMAL NAV, SHOW AS DROPDOWN */
+  nav{
+    position:fixed;top:62px;left:0;right:0;
+    background:#050B1E;
+    flex-direction:column;align-items:stretch;
+    padding:12px 16px 20px;
+    gap:6px;
+    border-bottom:3px solid var(--gold);
+    box-shadow:0 20px 40px rgba(0,0,0,.6);
+    display:none; /* hidden until hamburger clicked */
+    max-height:calc(100vh - 62px);
+    overflow-y:auto;
+  }
+  nav.show{display:flex;animation:slideDown .25s ease}
+  @keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+  nav a{
+    font-size:16px;padding:14px 16px;text-align:center;
+    background:#0F1D45;border:1px solid rgba(255,215,0,.2);
+  }
+  nav a.active{background:var(--gold);color:#000}
+  .grid,.portfolio-grid,.grid2,.grid3,.two{grid-template-columns:1fr}
+  .page{padding-top:82px;padding-left:4%;padding-right:4%}
+  h1{font-size:34px}
+  .btn,.btn-gold,.btn-outline{width:100%;text-align:center}
+  .hero-btns .btn,.hero-btns .btn-outline,.hero-btns .btn-gold{width:auto;flex:1}
+}
+@media(max-width:380px){
+  .logo{font-size:18px}
+  .hero-img{max-width:260px}
+  .stats{flex-direction:row}
+  .stat{min-width:45%}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <!-- EDIT HERE: BRAND -->
+  <div class="logo">AHMAD<span> •</span><small>BLUE & GOLD CREATIVE</small></div>
+
+  <!-- NEW HAMBURGER - 3 lines, turns to X -->
+  <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav id="nav">
+    <a class="active" onclick="showPage('home',this)">🏠 Home</a>
+    <a onclick="showPage('about',this)">👤 About</a>
+    <a onclick="showPage('services',this)">⚙️ Services</a>
+    <a onclick="showPage('portfolio',this)">🎨 Portfolio</a>
+    <a onclick="showPage('pricing',this)">💰 Pricing</a>
+    <a onclick="showPage('blog',this)">📰 Blog</a>
+    <a onclick="showPage('contact',this)">📞 Contact</a>
+  </nav>
+</header>
+
+<!-- HOME -->
+<section id="home" class="page active">
+  <div class="hero">
+    <div>
+      <span class="badge">✦ AVAILABLE FOR WORK • DUTSE</span>
+      <h1 style="margin-top:12px">Hello, I'm<br>Ahmad <span id="typing">Web Developer</span></h1>
+      <p class="subtitle">I build fast websites, design brands that stand out, protect systems from hackers, and edit videos people can't skip. One person — 4 powerful skills.</p>
+      <div><span class="tag">💻 Web Developer</span><span class="tag">🎨 Designer</span><span class="tag">🛡️ Cyber Security</span><span class="tag">🎬 Video Editor</span></div>
+      <div class="hero-btns"><button class="btn-gold" onclick="showPage('portfolio')">View My Work →</button><button class="btn-outline" onclick="showPage('contact')">Hire Me</button></div>
+      <div class="stats"><div class="stat"><b>25+</b><br><small>Projects</small></div><div class="stat"><b>18+</b><br><small>Clients</small></div><div class="stat"><b>4.9★</b><br><small>Rating</small></div><div class="stat"><b>24h</b><br><small>Reply</small></div></div>
+    </div>
+    <div>
+      <!-- EDIT HERE: YOUR PHOTO -->
+      <img class="hero-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80" alt="Ahmad">
+      <p style="text-align:center;margin-top:10px;color:var(--muted);font-size:13px">📍 Federal University Dutse (FUD) • Faculty of Computing</p>
+      <div class="socials" style="justify-content:center"><a href="https://wa.me/2349122949577">WhatsApp</a><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">LinkedIn</a></div>
+    </div>
+  </div>
+  <div class="marquee"><span>WEB DEVELOPMENT ✦ GRAPHICS DESIGN ✦ CYBER SECURITY ✦ VIDEO EDITING ✦ BRANDING ✦</span></div>
+  <h2 style="margin-top:30px">What Clients <span>Say</span></h2>
+  <div class="grid3">
+    <div class="testi"><p>"Ahmad did my business website in 2 days. Clean, fast and beautiful."</p><br><b>— Musa, Shop Owner</b><br><small>⭐⭐⭐⭐⭐</small></div>
+    <div class="testi"><p>"His flyer made my birthday go viral. Everybody asked who designed it."</p><br><b>— Fatima, Student</b><br><small>⭐⭐⭐⭐⭐</small></div>
+    <div class="testi"><p>"He edited my TikTok and it got 10k views. Transitions clean."</p><br><b>— Ibrahim, Creator</b><br><small>⭐⭐⭐⭐⭐</small></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="page">
+  <h2>About <span>Me</span></h2>
+  <div class="two">
+    <div>
+      <p>I'm <b style="color:var(--gold)">Ahmad</b>, 100L Cyber Security student at Federal University Dutse.</p><br>
+      <p>I started with phone editing, then Canva, then HTML/CSS/JS, then I fell in love with cyber security. Now I help students, businesses and creators grow online.</p><br>
+      <p><b>Faculty:</b> Faculty of Computing<br><b>Department:</b> Cyber Security<br><b>Level:</b> 100L<br><b>Phone:</b> 09122949577<br><b>Location:</b> Dutse, Jigawa</p><br>
+      <button class="btn-gold" onclick="showPage('contact')">Work With Me</button>
+      <div class="timeline">
+        <div><small>2024 - NOW</small><br><b>Web Developer & Designer</b></div>
+        <div><small>2025</small><br><b>Started Cyber Security @ FUD</b></div>
+        <div><small>2025 - NOW</small><br><b>Video Editor for Creators</b></div>
+      </div>
+    </div>
+    <div>
+      <h3>My Skills</h3>
+      <div style="margin-top:14px">
+        <div class="skill"><span>HTML / CSS / JavaScript <b>90%</b></span><div class="bar"><i style="width:90%"></i></div></div>
+        <div class="skill"><span>Graphics Design <b>88%</b></span><div class="bar"><i style="width:88%"></i></div></div>
+        <div class="skill"><span>Cyber Security <b>72%</b></span><div class="bar"><i style="width:72%"></i></div></div>
+        <div class="skill"><span>Video Editing <b>90%</b></span><div class="bar"><i style="width:90%"></i></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="page">
+  <h2>What I <span>Do</span></h2>
+  <div class="grid">
+    <div class="card"><h3>💻 Web Developer</h3><p>Business websites, portfolios, landing pages.</p><ul><li>Responsive for phone & laptop</li><li>WhatsApp button inside</li><li>Fast loading</li></ul><b class="price">From ₦20,000</b><br><br><button class="btn" onclick="showPage('pricing')">See Pricing</button></div>
+    <div class="card"><h3>🎨 Graphics Designer</h3><p>Logos, flyers, posters, branding.</p><ul><li>Logo + Flyer combo</li><li>Instagram designs</li><li>Print-ready</li></ul><b class="price">From ₦5,000</b><br><br><button class="btn" onclick="showPage('pricing')">See Pricing</button></div>
+    <div class="card"><h3>🛡️ Cyber Security</h3><p>Protect your accounts & website.</p><ul><li>Password check</li><li>Phishing awareness</li><li>Website audit</li></ul><b class="price">From ₦15,000</b><br><br><button class="btn" onclick="showPage('pricing')">See Pricing</button></div>
+    <div class="card"><h3>🎬 Video Editor</h3><p>Reels, TikTok, YouTube, ads.</p><ul><li>Clean transitions</li><li>Subtitles</li><li>Trending sounds</li></ul><b class="price">From ₦7,000</b><br><br><button class="btn" onclick="showPage('pricing')">See Pricing</button></div>
+  </div>
+  <div class="card" style="margin-top:18px;text-align:center;border:1px solid var(--gold)"><h3>🔥 COMBO — Website + Logo + Promo Video</h3><p class="price">Only ₦35,000 <span style="font-size:13px;color:var(--muted);text-decoration:line-through">₦50,000</span></p><button class="btn-gold" onclick="showPage('contact')">Claim Offer</button></div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio" class="page">
+  <h2>My <span>Work</span></h2>
+  <div class="filter">
+    <button class="active" onclick="filterWork('all',this)">All</button>
+    <button onclick="filterWork('web',this)">Web</button>
+    <button onclick="filterWork('design',this)">Design</button>
+    <button onclick="filterWork('security',this)">Security</button>
+    <button onclick="filterWork('video',this)">Video</button>
+  </div>
+  <div class="portfolio-grid">
+    <div class="p-card" data-cat="web"><img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&q=80"><div><h3>Business Website</h3><p>Web • HTML/CSS/JS</p></div></div>
+    <div class="p-card" data-cat="design"><img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80"><div><h3>Brand Logo Pack</h3><p>Design • Photoshop</p></div></div>
+    <div class="p-card" data-cat="security"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80"><div><h3>Security Audit</h3><p>Security • Check Report</p></div></div>
+    <div class="p-card" data-cat="video"><img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=600&q=80"><div><h3>Promo Video Edit</h3><p>Video • CapCut</p></div></div>
+    <div class="p-card" data-cat="web"><img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&q=80"><div><h3>Student Portfolio</h3><p>Web • Responsive</p></div></div>
+    <div class="p-card" data-cat="design"><img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&q=80"><div><h3>Birthday Flyer</h3><p>Design • Canva</p></div></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="page">
+  <h2>Simple <span>Pricing</span></h2>
+  <p class="subtitle">Pay 50% to start, 50% after you love the work.</p>
+  <div class="grid3">
+    <div class="card"><h3>🟦 STARTER</h3><p class="price">₦5,000 - ₦10,000</p><ul><li>1 Flyer / Logo</li><li>1 Video Edit (30 sec)</li><li>Delivery: 24 hours</li><li>1 Revision</li></ul><button class="btn" style="width:100%" onclick="order('Starter Package')">Order Starter</button></div>
+    <div class="card" style="border:2px solid var(--gold)"><span class="badge">⭐ MOST POPULAR</span><h3 style="margin-top:10px">🟨 BUSINESS</h3><p class="price">₦20,000 - ₦35,000</p><ul><li>Full Website (4 pages)</li><li>Logo + Flyer</li><li>1 Promo Video</li><li>Delivery: 3-5 days</li></ul><button class="btn-gold" style="width:100%" onclick="order('Business Package')">Order Business</button></div>
+    <div class="card"><h3>🟦 PREMIUM</h3><p class="price">₦50,000+</p><ul><li>Website + Branding + Videos</li><li>Security Check</li><li>1 Month Support</li></ul><button class="btn" style="width:100%" onclick="order('Premium Package')">Order Premium</button></div>
+  </div>
+  <h2 style="margin-top:28px">Questions <span>People Ask</span></h2>
+  <div class="faq" onclick="this.classList.toggle('open')"><b>How long does a website take? →</b><p>Simple: 2-3 days. Business: 3-5 days.</p></div>
+  <div class="faq" onclick="this.classList.toggle('open')"><b>How do I pay you? →</b><p>Bank transfer, Opay, or SmartCash. 50% to start, 50% after.</p></div>
+  <div class="faq" onclick="this.classList.toggle('open')"><b>Can you work if I'm not in Dutse? →</b><p>Yes! I work with clients all over Nigeria on WhatsApp.</p></div>
+</section>
+
+<!-- BLOG -->
+<section id="blog" class="page">
+  <h2>My <span>Blog & Tips</span></h2>
+  <div class="grid3">
+    <div class="card"><span class="badge">WEB</span><h3 style="margin-top:10px">5 Reasons Your Business Needs a Website</h3><p>Customers check Google before they buy...</p></div>
+    <div class="card"><span class="badge">SECURITY</span><h3 style="margin-top:10px">How To Know If A Link Is A Scam</h3><p>Check these 3 things before you click...</p></div>
+    <div class="card"><span class="badge">VIDEO</span><h3 style="margin-top:10px">How To Make TikTok Go Viral</h3><p>First 2 seconds matter...</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="page">
+  <h2>Let's Work <span>Together</span></h2>
+  <div class="two">
+    <div>
+      <p>📞 <b>Phone / WhatsApp:</b> 09122949577</p>
+      <p>📧 <b>Email:</b> yourname@gmail.com</p>
+      <p>📍 <b>Location:</b> Dutse, Jigawa</p>
+      <p>🎓 <b>School:</b> FUD</p><br>
+      <a class="btn-gold" href="https://wa.me/2349122949577?text=Hello%20Ahmad" target="_blank">💬 Chat on WhatsApp</a>
+      <div class="socials"><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Facebook</a></div>
+    </div>
+    <form onsubmit="sendMsg(event)">
+      <input id="cName" placeholder="Your Name" required>
+      <select id="cService"><option>Web Developer</option><option>Graphics Designer</option><option>Cyber Security Analyst</option><option>Video Editor</option><option>Combo Offer - ₦35,000</option></select>
+      <select id="cBudget"><option>Budget: ₦5k - ₦10k</option><option>Budget: ₦10k - ₦20k</option><option>Budget: ₦20k - ₦35k</option><option>Budget: ₦50k+</option></select>
+      <textarea id="cMsg" rows="4" placeholder="Tell me about your project..." required></textarea>
+      <button class="btn-gold" style="width:100%">Send on WhatsApp →</button>
+    </form>
+  </div>
+</section>
+
+<footer>© 2026 <b style="color:var(--gold)">AHMAD</b> — Blue & Gold Creative • Web | Design | Security | Video</footer>
+
+<script>
+// ===== HAMBURGER LOGIC - FIXED FOR ANDROID =====
+const hamburger = document.getElementById('hamburger');
+const nav = document.getElementById('nav');
+
+function toggleMenu(){
+  nav.classList.toggle('show');
+  hamburger.classList.toggle('open');
+  // Prevent page scroll when menu open on phone
+  document.body.style.overflow = nav.classList.contains('show') ? 'hidden' : '';
+}
+function closeMenu(){
+  nav.classList.remove('show');
+  hamburger.classList.remove('open');
+  document.body.style.overflow = '';
+}
+function showPage(id, el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+  if(el) el.classList.add('active');
+  closeMenu(); // <-- auto close hamburger after click
+  window.scrollTo(0,0);
+}
+// Close menu if user taps outside menu on Android
+document.addEventListener('click', function(e){
+  if(window.innerWidth <= 768 && nav.classList.contains('show')){
+    if(!nav.contains(e.target) && !hamburger.contains(e.target)){
+      closeMenu();
+    }
+  }
+});
+function filterWork(cat, btn){
+  document.querySelectorAll('.filter button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.p-card').forEach(card=>{
+    card.style.display = (cat==='all' || card.dataset.cat===cat) ? 'block' : 'none';
+  });
+}
+const roles = ["Web Developer","Graphics Designer","Cyber Security Analyst","Video Editor"];
+let ri=0, ci=0, del=false;
+function type(){
+  const el=document.getElementById('typing');
+  let word=roles[ri];
+  el.textContent = del ? word.slice(0,--ci) : word.slice(0,++ci);
+  let speed = del ? 40 : 90;
+  if(!del && ci===word.length){speed=1500; del=true}
+  else if(del && ci===0){del=false; ri=(ri+1)%roles.length; speed=300}
+  setTimeout(type,speed);
+}
+type();
+function sendMsg(e){
+  e.preventDefault();
+  const name=document.getElementById('cName').value;
+  const service=document.getElementById('cService').value;
+  const budget=document.getElementById('cBudget').value;
+  const msg=document.getElementById('cMsg').value;
+  window.open(`https://wa.me/2349122949577?text=${encodeURIComponent(`Hello Ahmad, I'm ${name}. I need ${service}. ${budget}. ${msg}`)}`,'_blank');
+}
+function order(pkg){
+  window.open(`https://wa.me/2349122949577?text=${encodeURIComponent('Hello Ahmad, I want to order '+pkg)}`,'_blank');
+}
+</script>
+</body>
+</html>
